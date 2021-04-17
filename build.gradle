@@ -18,6 +18,16 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+jar {
+    from('frontend/dist') {
+        //Public is a default supported Spring Boot resources directory.
+        into 'src/main/resources/static'
+    }
+}
+
+//frontend:build will be run before the processResources
+processResources.dependsOn('frontend:build')
+
 test {
     useJUnitPlatform()
 }
